@@ -1,4 +1,4 @@
-# Test Vagrant and Ansible
+# Test Vagrant and Ansible set-up
 ## Provision machine
 ```bash
 vagrant up
@@ -11,6 +11,30 @@ Bringing machine 'server1' up with 'virtualbox' provider...
 ==> server0: PXL Lab machine build complete.
 [...]
 ==> server1: PXL Lab machine build complete.
+```
+
+## clean previous localhost ssh key references
+make sure the script is executable
+```bash
+chmod +x ./clean_known_hosts
+```
+run the cleaning script (it is idempotent)
+```bash
+./clean_known_hosts
+```
+Typical output:
+```
+# Host [127.0.0.1]:2222 found: line 11
+/home/student/.ssh/known_hosts updated.
+Original contents retained as /home/student/.ssh/known_hosts.old
+# Host [127.0.0.1]:2200 found: line 10
+/home/student/.ssh/known_hosts updated.
+Original contents retained as /home/student/.ssh/known_hosts.old
+```
+or:
+```
+Host [127.0.0.1]:2222 not found in /home/tomc/.ssh/known_hosts
+Host [127.0.0.1]:2200 not found in /home/tomc/.ssh/known_hosts
 ```
 
 ## Test network connectivity
